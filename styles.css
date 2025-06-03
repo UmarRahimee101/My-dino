@@ -1,0 +1,178 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #add8e6; /* ہلکا نیلا آسمان */
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#game-container {
+    width: 900px; /* چوڑا گیم ایریا */
+    height: 300px; /* اونچا گیم ایریا */
+    border: 3px solid #6b4a2d; /* جنگل کی تھیم والا بارڈر */
+    position: relative;
+    overflow: hidden;
+    background-color: #87ceeb; /* ہلکا نیلا آسمان */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Parallax Layers Styling */
+.parallax-layer {
+    position: absolute;
+    bottom: 0;
+    width: 200%; /* تاکہ حرکت کا اثر زیادہ دیر تک رہے */
+    height: 100%;
+    background-repeat: repeat-x; /* تصویر کو دہرائیں */
+    background-size: auto 100%; /* اونچائی کے مطابق، چوڑائی آٹو */
+}
+
+#layer1 {
+    background-image: url('images/background-layer1.png'); /* اپنی تصویر کا path دیں */
+    height: 100%; /* پوری اونچائی */
+    animation: parallax1 40s linear infinite;
+}
+
+#layer2 {
+    background-image: url('images/background-layer2.png'); /* اپنی تصویر کا path دیں */
+    height: 80%; /* تھوڑی کم اونچائی */
+    animation: parallax2 30s linear infinite;
+}
+
+#layer3 {
+    background-image: url('images/background-layer3.png'); /* اپنی تصویر کا path دیں */
+    height: 60%; /* سب سے قریب اور تیز */
+    animation: parallax3 15s linear infinite;
+}
+
+/* Parallax Animations */
+@keyframes parallax1 {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% 0; }
+}
+
+@keyframes parallax2 {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% 0; }
+}
+
+@keyframes parallax3 {
+    0% { background-position: 0 0; }
+    100% { background-position: -100% 0; }
+}
+
+#dinosaur {
+    width: 80px; /* ڈائنوسار کا سائز بڑا کریں */
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    left: 80px;
+    background-image: url('images/dino-run1.png'); /* ڈائنو کی پہلی تصویر */
+    background-size: cover;
+    transition: bottom 0.2s ease-out; /* جمپ کو ہموار بنانے کے لیے */
+}
+
+.dino-run {
+    animation: dino-run-animation 0.3s steps(1) infinite; /* دوڑنے کی اینیمیشن */
+}
+
+@keyframes dino-run-animation {
+    0% { background-image: url('images/dino-run1.png'); }
+    50% { background-image: url('images/dino-run2.png'); }
+    100% { background-image: url('images/dino-run1.png'); }
+}
+
+.dino-jump {
+    background-image: url('images/dino-jump.png') !important; /* جمپ کرتے وقت یہ تصویر ہو */
+}
+
+.jump {
+    animation: jump-animation 0.6s ease-out; /* جمپ کی اینیمیشن */
+}
+
+@keyframes jump-animation {
+    0% { bottom: 0; }
+    40% { bottom: 150px; } /* اوپر کی طرف جمپ کی اونچائی */
+    100% { bottom: 0; }
+}
+
+/* Obstacles */
+.obstacle {
+    position: absolute;
+    bottom: 0;
+    width: 60px; /* رکاوٹ کا سائز */
+    height: 70px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: obstacle-move 3s linear infinite;
+}
+
+/* Obstacle Images (JavaScript will set these) */
+.obstacle-tree {
+    background-image: url('images/obstacle1.png');
+}
+.obstacle-rock {
+    background-image: url('images/obstacle2.png');
+}
+
+@keyframes obstacle-move {
+    0% { right: -100px; } /* اسکرین کے باہر سے شروع کریں */
+    100% { right: 100%; } /* اسکرین کے پار چلے جائیں */
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    z-index: 100; /* تاکہ سب سے اوپر نظر آئے */
+}
+
+#game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 200;
+}
+
+#game-over-screen h1 {
+    margin-bottom: 10px;
+    font-size: 3em;
+}
+
+#game-over-screen p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#restart-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#restart-button:hover {
+    background-color: #45a049;
+}
+
+.hidden {
+    display: none !important;
+}
